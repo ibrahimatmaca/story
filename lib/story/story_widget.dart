@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:story_application/story/story_frame.dart';
 import 'package:story_application/story/user_info.dart';
 import 'package:video_player/video_player.dart';
 
@@ -29,11 +28,14 @@ class StroyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double widthM = MediaQuery.of(context).size.width;
+    final double heightM = MediaQuery.of(context).size.height;
     return Stack(
       children: <Widget>[
         model.mediaType == MediaType.IMAGE
             ? SizedBox(
-                width: MediaQuery.of(context).size.width,
+                width: widthM,
+                height: heightM,
                 child: FittedBox(
                   fit: BoxFit.cover,
                   child: CachedNetworkImage(
@@ -48,14 +50,13 @@ class StroyWidget extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.fill,
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * .8,
+                        width: widthM,
+                        height: heightM * .8,
                         child: VideoPlayer(videoController!),
                       ),
                     ),
                   )
                 : const SizedBox.shrink(),
-        StoryFrame(detailShortText: detailShortText),
         Positioned(
           top: 10.0,
           left: 10.0,
